@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To Impress Clothing - Bra Size Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fdf6ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .calculator {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    h1 {
+      color: #7a4bc6;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      text-align: left;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #7a4bc6;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #6533b3;
+    }
+
+    #result {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h1>Bra Size Calculator</h1>
+    <label for="underbust">Underbust (in inches)</label>
+    <input type="number" id="underbust" placeholder="e.g., 30" />
+
+    <label for="bust">Bust (in inches)</label>
+    <input type="number" id="bust" placeholder="e.g., 34" />
+
+    <button onclick="calculateBraSize()">Calculate My Size</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function calculateBraSize() {
+      const underbust = parseFloat(document.getElementById("underbust").value);
+      const bust = parseFloat(document.getElementById("bust").value);
+
+      if (isNaN(underbust) || isNaN(bust)) {
+        document.getElementById("result").innerText = "Please enter valid numbers.";
+        return;
+      }
+
+      let bandSize = Math.round(underbust);
+      if (bandSize % 2 !== 0) bandSize += 1;
+
+      const difference = Math.round(bust - underbust);
+      const cupSizes = ["AA", "A", "B", "C", "D", "DD", "E", "F", "G", "H"];
+      const cupSize = cupSizes[difference] || "Custom";
+
+      document.getElementById("result").innerText = `Your Bra Size is: ${bandSize}${cupSize}`;
+    }
+  </script>
+</body>
+</html>
